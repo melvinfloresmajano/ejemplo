@@ -16,7 +16,7 @@ namespace ejemploLINQ.Controllers
        
         public ActionResult Index()
         {
-            
+            string test = "cambios";
             var listado = Db.Lista();
             return View(listado.ToList());
         }
