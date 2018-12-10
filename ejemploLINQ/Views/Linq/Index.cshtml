@@ -1,0 +1,90 @@
+﻿@model List<ejemploLINQ.Models.Estudiantes>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-sm-offset-2 jumbotron" style="margin-top: 30px;">
+            <form action="/" method="post" id="frm">
+                <a class="usandoClase" id="usandoID">Opciones</a>
+                <div id="ocultar" class="ocultar" style="display:none;">
+                    <div class="form-group" style="border-color:black;">
+                        <select name="select" class="form-control">
+                            <option value="0">..::Selecionar::..</option>
+                            <option value="1">Nombre</option>
+                            <option value="2">Materia</option>
+                            <option value="3">Promedio</option>
+                        </select>
+                    </div>
+                    <label class="radio-inline"><input type="radio" name="rd" value="1" checked />Nombre</label>
+                    <label class="radio-inline"><input type="radio" name="rd" value="2" checked />Materia</label>
+                    <label class="radio-inline"><input type="radio" name="rd" value="3" checked />Promedio</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="txtbuscar" value="" class="form-control" placeholder="Digite nombre de la materia" autocomplete="off" />
+                </div>
+                <input type="submit" class="btn btn-info btn-lg" name="btn" value="BUSCAR" />
+            </form>
+        </div>
+        <div class="col-lg-8 col-sm-offset-2 jumbotron" style="margin-top: 60px;">
+            <p>Resultados</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Carnet</th>
+                        <th>Nombre</th>
+                        <th>Materia</th>
+                        <th>Promedio</th>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Carnet</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.Materia</td>
+                            <td>@item.Promedio</td>
+                            <td>Pendiente</td>
+                            <td>@item.FechaRegistro</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*@section validarCampos{*@
+    <script type="text/javascript">
+        $("#frm").validate({
+            rules: {
+                txtbuscar: {
+                    required: true,
+                    digits: true
+                }
+            }
+        });
+        $.extend($.validator.messages, {
+            required: "Este Campo es obligatorio",
+            digits: "Por favor, digite solo digitos"
+        });
+    </script>
+}
+
+@section mostarOcultar{
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $(".usandoClase").click(
+                    function () {
+                        $("#ocultar").toggle();
+                    }
+                );
+            }
+        );
+    </script>
+}
+
